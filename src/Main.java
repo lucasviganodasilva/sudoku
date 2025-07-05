@@ -35,4 +35,18 @@ public class Main {
         }
         return false;
     }
+
+    public boolean isNumberInSquare(int[][] sudokuGame, int row, int column, int number) {
+        int squareRow = row - row % 3;
+        int squareColumn = column - column % 3;
+
+        for (int i = squareRow; i < squareRow + 1; i++) {
+            for (int j = squareColumn; j < squareColumn + 1; j++) {
+                if (sudokuGame[i][j] == number) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
