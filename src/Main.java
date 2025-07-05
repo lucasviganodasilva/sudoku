@@ -49,4 +49,18 @@ public class Main {
         }
         return false;
     }
+
+    public boolean isPlaceEmpty(int[][] sudokuGame, int row, int column, int number) {
+        return !isNumberInColumn(sudokuGame, column, number) &&
+                !isNumberInRow(sudokuGame, row, number) &&
+                !isNumberInSquare(sudokuGame, row, column, number);
+    }
+
+    public boolean playSudoku(int[][] sudokuGame) {
+        for (int row = 0; row < boardSize; row++) {
+            for (int column = 0; column < boardSize; column ++) {
+
+            }
+        }
+    }
 }
