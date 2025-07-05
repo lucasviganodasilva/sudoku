@@ -17,4 +17,22 @@ public class Main {
             {7, 0, 0, 6, 3, 0, 4, 0, 9},
       };
     }
+
+    public boolean isNumberInRow(int[][] sudokuGame, int row, int number) {
+        for (int i = 0; i < boardSize; i++) {
+            if (sudokuGame[row][i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isNumberInColumn(int[][] sudokuGame, int column, int number) {
+        for (int i = 0; i < boardSize; i++) {
+            if (sudokuGame[i][column] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
