@@ -2,7 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    public int boardSize = 9;
+    public static int boardSize = 9;
 
     public static void main(String[] args) {
       int [][] sudokuGame = {
@@ -16,9 +16,16 @@ public class Main {
             {8, 0, 0, 0, 0, 9, 0, 0, 0},
             {7, 0, 0, 6, 3, 0, 4, 0, 9},
       };
+
+      if (playSudoku(sudokuGame)) {
+          System.out.println("O jogo foi resolvido");
+      } else {
+          System.out.println("Não foi possível resolver o jogo");
+      }
+
     }
 
-    public boolean isNumberInRow(int[][] sudokuGame, int row, int number) {
+    public static boolean isNumberInRow(int[][] sudokuGame, int row, int number) {
         for (int i = 0; i < boardSize; i++) {
             if (sudokuGame[row][i] == number) {
                 return true;
@@ -27,7 +34,7 @@ public class Main {
         return false;
     }
 
-    public boolean isNumberInColumn(int[][] sudokuGame, int column, int number) {
+    public static boolean isNumberInColumn(int[][] sudokuGame, int column, int number) {
         for (int i = 0; i < boardSize; i++) {
             if (sudokuGame[i][column] == number) {
                 return true;
@@ -36,7 +43,7 @@ public class Main {
         return false;
     }
 
-    public boolean isNumberInSquare(int[][] sudokuGame, int row, int column, int number) {
+    public static boolean isNumberInSquare(int[][] sudokuGame, int row, int column, int number) {
         int squareRow = row - row % 3;
         int squareColumn = column - column % 3;
 
@@ -50,17 +57,31 @@ public class Main {
         return false;
     }
 
-    public boolean isPlaceEmpty(int[][] sudokuGame, int row, int column, int number) {
+    public static boolean isPlaceEmpty(int[][] sudokuGame, int row, int column, int number) {
         return !isNumberInColumn(sudokuGame, column, number) &&
                 !isNumberInRow(sudokuGame, row, number) &&
                 !isNumberInSquare(sudokuGame, row, column, number);
     }
 
-    public boolean playSudoku(int[][] sudokuGame) {
+    public static boolean playSudoku(int[][] sudokuGame) {
         for (int row = 0; row < boardSize; row++) {
             for (int column = 0; column < boardSize; column ++) {
+                if (sudokuGame[row][column] == 0) {
+                    for (int number = 1; number <= boardSize; number++) {
+                        if(isPlaceEmpty(sudokuGame, row, column, number)) {
+                            sudokuGame[row][column] = number;
 
+                            if (playSudoku(sudokuGame)) {
+                                return true;
+                            } else {
+                                sudokuGame[row][column] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
             }
         }
+        return true;
     }
 }
