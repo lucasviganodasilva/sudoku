@@ -23,6 +23,8 @@ public class Main {
           System.out.println("Não foi possível resolver o jogo");
       }
 
+      showGamePlayed(sudokuGame);
+
     }
 
     public static boolean isNumberInRow(int[][] sudokuGame, int row, int number) {
@@ -83,5 +85,14 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public static void showGamePlayed(int[][] sudokuGame) {
+        for (int row = 0; row < boardSize; row++) {
+            for (int column = 0; column < boardSize; column++) {
+                System.out.println(sudokuGame[row][column]);
+            }
+            System.out.println();
+        }
     }
 }
